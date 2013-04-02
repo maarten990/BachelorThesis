@@ -6,6 +6,7 @@
 *.blg
 *.dvi
 *.fdb_latexmk
+*.fls
 *.glg
 *.glo
 *.gls
@@ -22,6 +23,7 @@
 *.nav
 *.nlo
 *.out
+*.pdf
 *.pdfsync
 *.ps
 *.snm
@@ -30,3 +32,5 @@
 *.vrb
 *.xdy
 *.tdo
+
+.*.swp
