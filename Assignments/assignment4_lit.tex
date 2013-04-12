@@ -1,0 +1,67 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage[hidelinks]{hyperref}
+
+\author{Maarten de Jonge}
+\title{Assignment 4 - Literature and Research Question \\
+\large{Projective Geometric Algebra}}
+
+\begin{document}
+\maketitle
+
+\section*{Research Question}
+In the previous year, Patrick de Kok did a project about projective line
+geometry for geometric algebra\cite{dekok2012} in which he extended the GAViewer
+software\footnote{\url{http://www.geometricalgebra.net/gaviewer\_download.html}}
+with visualizations for the Pl\"{u}cker model of geometric algebra. Some
+visualizations, such as those of 3-blades, were not yet implemented due to a
+lack of understanding at the time. Recent developments allow for these
+visualizations to now be implemented, which I will be doing.
+
+The further direction of the project is still up for consideration. One of the
+options is to apply projective geometric algebra to 2D projective geometry in
+the same vein as the Cinderella
+software\footnote{\url{http://doc.cinderella.de/tiki-index.php?page=Theoretical+Background}},
+and compare the results (in terms of e.g. performance, ease of implementation,
+elegance, or other such metrics) of the geometric algebra approach with the
+complex linear algebra used by Cinderella.
+
+The next weeks will bring more clarity as I get more acquainted with the subject
+and a more concrete direction can be formulated.
+
+\section*{Literature}
+
+\begin{itemize}
+  \item Patrick de Kok's bachelor thesis from last year\cite{dekok2012}, in which
+    he provides an introduction to projective line geometry/Pl\"{u}cker
+    coordinates and describes the implementation of their visualizations in
+    GAViewer, provides a good starting point for getting acquainted with
+    previous work before extending it.
+  \item \emph{Geometric Algebra for Computer
+    Scientists}\cite{dorst2009geometric} is an introductory book to geometric
+    algebra which describes various models of geometric algebra, including the
+    homogeneous and Pl\"{u}cker models which provide most of the necessary
+    background to understand the rest of the literature.
+  \item Li and Zhang\cite{hangbo2011} model classical line geometry in
+    $\mathbb{R}^{3,3}$ using Pl\"{u}cker coordinates, which lays the basis
+    for projective geometry using geometric algebra. This paper is an important
+    basis for the work done by Patrick, and thus will aid in understanding his
+    previous work.
+  \item Pottmann and Wallner\cite{pottmann2001computational} in chapters 2 and 3
+    of their book describe the geometric elements of 6D space with Pl\"{u}cker
+    coordinates in linear algebra.. Although using linear algebra, there is a
+    correspondence with the geometric algebra described by \cite{hangbo2011}
+    which makes this helpful in describing these elements in geometric
+    algebra.
+  \item An unreleased paper by Leo Dorst\cite{dorst2013versors} expands on the
+    things done by Patrick last year with new insights, such as extraction of
+    parameters of the \emph{regulus} which allow it to be visualised in
+    GAViewer. It also details 2D projective geometry, one of the potential
+    directions to take in this project.
+\end{itemize}
+
+\bibliographystyle{plain}
+\bibliography{library}
+\end{document}
