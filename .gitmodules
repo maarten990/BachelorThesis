@@ -1,0 +1,3 @@
+[submodule "GAViewer"]
+	path = GAViewer
+	url = git@github.com:pkok/bsc-pga.git
