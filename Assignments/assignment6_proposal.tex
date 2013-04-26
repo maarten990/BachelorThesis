@@ -9,19 +9,21 @@
 \title{Projective Geometric Algebra}
 
 \begin{document}
-\newcommand{\rp}{$\mathbb{R}^{3,3}$}
+\newcommand{\rp}{$\mathbb{R}^{3,3}$ }
 
 \maketitle
 
-\section*{Literature Review}
+\section{Introduction}
+
+\section{Literature Review}
 Li and Zhang\cite{hangbo2011} model line geometry in $\mathbb{R}^{3,3}$,
 representing lines as vectors that square to zero (\emph{null vectors}). This
 generalises the Pl\"{u}cker coordinate representation of lines to a proper
 geometric algebra. The 6D vector of a line's Pl\"{u}cker coordinates corresponds
 to the coordinates of of the line's direction and moment on a basis of 2-blades
-in $\wedge^2(V^4)$, a bivector space over a 4D homogeneous vector space. The
+in $\wedge^2(V^4)$, a bivector space over a 4D homogeneous vector space. They
 also provide a metric for this space, turning it into $\mathbb{R}^{3, 3}$.
-They proceed to give geometrics interpretations of the various blades that can
+They proceed to give geometric interpretations of the various blades that can
 be formed in $\mathbb{R}^{3, 3}$.
 
 Pottmann and Wallner\cite{pottmann2001computational} do similarly, except using
@@ -30,19 +32,36 @@ linear algebra rather than geometric algebra as Li and Zhang did.
 Leo Dorst\cite{dorst2013versors} provides visualisations for many of the
 geometric features described by \cite{hangbo2011} and
 \cite{pottmann2001computational} and describes how to extract the parameters
-required for implementing these visualisations.
-GAViewer\footnote{\url{http://www.geometricalgebra.net/gaviewer\_download.html}},
-a visualisation tool/graphical calculator for geometric algebra which handles
-many different models of the algebra. Patrick de Kok\cite{dekok2012} implemented
-the Pl\"{u}cker model of \cite{hangbo2011} in GAViewer and added many of the
-visualisations described by \cite{dorst2013versors}.
+required for implementing these visualisations. Additionally, the paper contains
+a novel approach to modeling 2D projective geometry in the previously described
+\rp, defining the elementary operations (translations, scaling, perspective
+transformations, a rotation and a squeeze) in terms of their $6 \times 6$
+transformation matrices.
 
-\section*{Research Question}
-At the time of \cite{dekok2012}, not all blades of \rp were able to be
-visualised. A recent breakthrough by Dorst allows for the visualisation of
+GAViewer\footnote{\url{http://www.geometricalgebra.net/gaviewer\_download.html}}
+is a visualisation tool/graphical calculator for geometric algebra which handles
+many different models of the algebra. Patrick de Kok\cite{dekok2012} implemented
+the Pl\"{u}cker model of Li and Zhang in GAViewer and added many of the
+visualisations described by Dorst.
+
+Cinderella\cite{richter1999interactive} is a software package for performing
+interactive 2D projective geometry using a 6D homogeneous representation with
+complex numbers. This avoids the edge cases commonly experienced in classic
+Euclidian geometry.  For a good read on their approach to this problem, see
+\url{http://doc.cinderella.de/tiki-index.php?page=Theoretical+Background}.
+
+\section{Research Question}
+At the time of \cite{dekok2012}, not all geometric elements of \rp were able to
+be visualised. A recent breakthrough by Dorst allows for the visualisation of
 3-blades formed by three skew lines, which form a \emph{regulus} (figure
-\ref{fig:regulus}). I will continue Patrick's work and implement this missing
-visualisation.
+\ref{fig:regulus}). First I will continue Patrick's work and implement this
+missing visualisation. Then I will look at the 2D projective geometry model in
+\rp given by Dorst and research how to perform basic geometric operations in
+this model. For example, a conic section can be represented as a cross-section
+of a regulus, but it is as of yet unclear how an intersection between two of
+these conic sections could be handled in this new model. This could provide the
+groundwork for a consistent system of 2D projective geometry, described using
+the \rp model of geometric algebra.
 
 \begin{figure}[htbp]
   \centering
@@ -51,24 +70,69 @@ visualisation.
   \label{fig:regulus}
 \end{figure}
 
-Also, something else.
-
-%The further direction of the project is still up for consideration. One of the
-%options is to apply projective geometric algebra to 2D projective geometry in
-%the same vein as the Cinderella
-%software\footnote{\url{http://doc.cinderella.de/tiki-index.php?page=Theoretical+Background}},
-%and compare the results (in terms of e.g. performance, ease of implementation,
-%elegance, or other such metrics) of the geometric algebra approach with the
-%complex linear algebra used by Cinderella.
-
 \section{Method and Approach}
-The project can be roughly divided into 3 parts:
-\begin{itemize}
-  \item Becoming familiar with the field of projective line geometry and the
-    required algebra\"{i}c knowledge.
-  \item Implementing the GAViewer visualisations.
-  \item The other thing.
-\end{itemize}
+The project can be roughly divided into three parts:
+\begin{enumerate}
+\item Becoming familiar with the field of projective geometry, Pl\"{u}cker
+  coordinates, and the required algebra\"{i}c knowledge.
+\item Implementing the GAViewer visualisation.
+\item Researching the operations of 2D projective geometry in the geometric
+  algebra of \rp.
+\end{enumerate}
+This division natually leads to three milestones:
+\begin{enumerate}
+\item got the mathematical background down
+\item implemented visualisation
+\item discovered something new and exciting
+\end{enumerate}
+
+The first part is rather straightforward, consisting mainly of reading papers,
+books (\cite{dorst2009geometric}), and using GAViewer to build up intuition.
+The second part is similarly well-defined; I will take a look at the code of
+GAViewer and implement the missing regulus visualisation. The third (and main)
+part is trickier. It will likely be a matter of mathematical manipulations and
+experimentations until something useful rolls out. This process will be aided by
+both the previous parts (as visualisation is incredibly useful when dealing with
+geometry).
+
+\section{Evaluation}
+A quantitative evaluation is going to be hard or impossible. A qualitative
+evaluation is more doable, if only of the form ``It didn't exist yet. Now it
+does. That is good.'' Correctness of the result should be formally
+provable due to the nature of the research. A comparison to the
+existing complex homogeneous approach to 2D projective geometry used
+by the Cinderella software is technically possible, but very
+subjective and likely not of much scientific value. So in the end, the
+evaluation will consist of formal validation.
+
+\section{Planning}
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{| l | p{9cm} |}
+    \hline
+    week & planning \\
+    \hline
+    \hline
+    17     & finish obtaining mathemetical intuition, write this proposal                                    \\
+    \hline
+    18     & work on visualisation                                                \\
+    \hline
+    19     & finish visualisation, start experimenting with the 2D geometry model \\
+    \hline
+    20, 21 & continue experimenting with the geometry                             \\
+    \hline
+    22     & prepare midterm presentation, do whatever assignment we get for Academic English, hopefully still have time for geometry                      \\
+    \hline
+    23     & continue working with the 2D geometry                                \\
+    \hline
+    24     & Still doing geometry, would be nice to be working towards a conclusion by now. Do the second Academic English assignment.                 \\
+    \hline
+    25     & Hopefully round-up the research, start documenting.                  \\
+    \hline
+    26     & Work for 14 hours a day, finish research, prepare report and presentation.   \\
+    \hline
+  \end{tabular}
+\end{table}
 
 \bibliographystyle{plain}
 \bibliography{library}
