@@ -3,6 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsfonts}
 \usepackage{graphicx}
+\usepackage{placeins}
 \usepackage[hidelinks]{hyperref}
 
 \author{Maarten de Jonge}
@@ -19,13 +20,18 @@ projective transformations, with applications in areas such as computer vision,
 computer graphics, and quantum physics. Compared to the familiar Euclidean
 geometry, the space is extended with elements at infinity. This solves a number
 of irregularities and adds a greater expressive power to the algebra. For
-example, two different lines in the same plane in Euclidean geometry can have
-either one point of intersection or zero (when the lines are parallel). With the
+example, two different lines in the same plane in Euclidean geometry have either
+one or zero (when the lines are parallel) points of intersection. With the
 addition of points at infinity, this becomes more general: two different lines
 in the same plane always have one point of intersection, where parallel lines
-will intersect in infinity. This mimics observations in real life, e.g. train
-tracks which appear to get closer together as the distance increases,
-eventually appearing to meet at an infinite distance.
+will meet in infinity. This mimics observations in real life, e.g. train tracks
+which appear to get closer together as the distance increases, eventually
+appearing to meet at an infinite distance even though they are obviously parallel.
+
+Recently, Pl\"{u}cker coordinates have been used in the field of geometric
+algebra to form a model suitable for representation of projective line
+geometry. This research will take a look at some of the properties of this
+model and make an attempt to apply it to 2D projective geometry.
 
 \section{Literature Review}
 Li and Zhang\cite{hangbo2011} model line geometry in $\mathbb{R}^{3,3}$,
@@ -59,8 +65,11 @@ visualisations described by Dorst.
 Cinderella\cite{richter1999interactive} is a software package for performing
 interactive 2D projective geometry using a 6D homogeneous representation with
 complex numbers. This avoids the edge cases commonly experienced in classic
-Euclidian geometry.  For a good read on their approach to this problem, see
+Euclidian geometry. For a good read on their approach to this problem, see
 \url{http://doc.cinderella.de/tiki-index.php?page=Theoretical+Background}.
+Note that their use of 6 dimensions to represent 2D geometry hints at a
+correspondence with the model described by Dorst, who also uses 6 (albeit
+different) dimensions for representing 2D geometry.
 
 \section{Research Question}
 At the time of \cite{dekok2012}, not all geometric elements of \rp were able to
@@ -113,9 +122,12 @@ evaluation is more doable, if only of the form ``It didn't exist yet. Now it
 does. That is good.'' Correctness of the result should be formally
 provable due to the nature of the research. A comparison to the
 existing complex homogeneous approach to 2D projective geometry used
-by the Cinderella software is technically possible, but very
-subjective and likely not of much scientific value. So in the end, the
-evaluation will consist of formal validation.
+by the Cinderella software is technically possible; however, it would be very
+hard to find a suitable metric while eliminating interference from other
+variables (e.g. a comparison on computational efficiency will likely depend more
+on the used libraries than on the actual mathematical approach). A comparison of
+this nature will not be in the scope of this research.
+So in the end, the evaluation will consist of formal validation.
 
 \section{Planning}
 \begin{table}[h!]
@@ -125,26 +137,30 @@ evaluation will consist of formal validation.
     week & planning \\
     \hline
     \hline
-    17     & finish obtaining mathemetical intuition, write this proposal                                    \\
+    17     & finish obtaining mathematical intuition, write this proposal \\
     \hline
-    18     & work on visualisation                                                \\
+    18     & work on visualisation \\
     \hline
     19     & finish visualisation, start experimenting with the 2D geometry model \\
     \hline
-    20, 21 & continue experimenting with the geometry                             \\
+    20, 21 & continue experimenting with the geometry \\
     \hline
-    22     & prepare midterm presentation, do whatever assignment we get for Academic English, hopefully still have time for geometry                      \\
+    22     & prepare midterm presentation, do the Academic English assignment
+    (impossible to estimate how long this will take), hopefully still have time for geometry  \\
     \hline
-    23     & continue working with the 2D geometry                                \\
+    23     & continue working with the 2D geometry \\
     \hline
-    24     & Still doing geometry, would be nice to be working towards a conclusion by now. Do the second Academic English assignment.                 \\
+    24     & Still doing geometry, nearing a finalisation of the work. Do the
+    second Academic English assignment. \\
     \hline
-    25     & Hopefully round-up the research, start documenting.                  \\
+    25     & Round-up the research, start documenting. \\
     \hline
-    26     & Work for 14 hours a day, finish research, prepare report and presentation.   \\
+    26     & Work for 14 hours a day, prepare report and
+    finish presentation. \\
     \hline
   \end{tabular}
 \end{table}
+\FloatBarrier
 
 \bibliographystyle{plain}
 \bibliography{library}
