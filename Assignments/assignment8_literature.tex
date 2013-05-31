@@ -1,0 +1,58 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
+
+\author{Maarten de Jonge}
+\title{2D Projective Geometric Algebra - Literature Review}
+
+\begin{document}
+\newcommand{\rp}{$\mathbb{R}^{3,3}$ }
+
+\maketitle
+
+\section{Literature Review}
+Li and Zhang\cite{hangbo2011} model line geometry in a 6D space, representing
+lines by means of their Pl\"{u}cker coordinates (with the constraint that the
+vector must square to zero, i.e. be a null vector).  The 6D vector of a line's
+Pl\"{u}cker coordinates corresponds to the coordinates of of the line's
+direction and moment on a basis of 2-blades in $\wedge^2(V^4)$, a bivector space
+over the 4D homogeneous vector space. Through a clever correspondence with the
+homogeneous space, Li and Zhang also provide a metric for the 6D
+representational space and show that it has the signature $\mathbb{R}^{3, 3}$. They
+proceed to give geometric interpretations of the various blades that can be
+formed in $\mathbb{R}^{3, 3}$.
+
+Pottmann and Wallner\cite{pottmann2001computational} do similarly, except they
+stay within the domain of linear algebra, giving a different viewpoint to what is
+essentially the same geometry.
+
+Leo Dorst\cite{dorst2013versors} provides visual representations for many of the
+geometric features described by \cite{hangbo2011} and
+\cite{pottmann2001computational} and describes how to extract the data required
+for implementing these visualizations in software. Additionally, the paper
+contains a novel approach to modeling 2D projective geometry in the previously
+described \rp, defining the elementary operations (translations, scaling,
+perspective transformations, a rotation and a squeeze) in terms of their
+transformation matrices.
+
+GAViewer\footnote{\url{http://www.geometricalgebra.net/gaviewer\_download.html}}
+is a graphical calculator for geometric algebra which handles many different
+algebraic models. Patrick de Kok\cite{dekok2012} implemented the
+Pl\"{u}cker model of Li and Zhang in GAViewer and added many of the
+visualizations described by Dorst.
+
+Cinderella\cite{richter1999interactive} is a software package for performing
+interactive 2D projective geometry using a 6D homogeneous representation with
+complex numbers. This avoids the edge cases commonly experienced in classic
+Euclidean geometry. For a good read on their approach to this problem, see
+\url{http://doc.cinderella.de/tiki-index.php?page=Theoretical+Background}.
+Note that their use of 6 dimensions to represent 2D geometry hints at a
+correspondence with the model described by Dorst, who also uses 6 (albeit
+different) dimensions for representing 2D projective geometry.
+
+\bibliographystyle{plain}
+\bibliography{library}
+\end{document}
