@@ -1,0 +1,293 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
+
+\author{Maarten de Jonge}
+\title{Projective Geometric Algebra}
+
+\begin{document}
+\newcommand{\rp}{$\mathbb{R}^{3,3}$ }
+
+\maketitle
+
+\section{Introduction}
+This introduction gives a short introduction to various concepts essential to
+the research, mainly projective geometry and geometric algebra. Subsequently,
+these are tied together and the topic of this research emerges.
+
+\subsection{Projective Geometry}
+Projective geometry is the study of geometric properties invariant under
+projective transformations, with applications in areas such as computer vision,
+computer graphics, and quantum physics. Compared to the familiar Euclidean
+geometry, the space is extended with elements at infinity. This solves a number
+of irregularities and adds a greater expressive power to the algebra. For
+example, two different lines in the same plane in Euclidean geometry have either
+one or zero (when the lines are parallel) points of intersection. With the
+addition of points at infinity, this becomes more general: two different lines
+in the same plane always have one point of intersection, where parallel lines
+will meet in infinity. This mimics observations in real life, e.g. train tracks
+which appear to converge as the distance increases, eventually
+appearing to meet at an infinite distance even though they are obviously parallel.
+An important advantage of this is in software implementation: you will not have
+to check for edge cases when there are no edge cases, leading to both simpler
+and more efficient implementations.
+
+\subsection{Geometric Algebra}
+Geometric algebra\cite{dorst2009geometric} is an algebra over an $n$-dimensional
+vector space, similar to
+linear algebra. Unlike linear algebra however, geometric algebra allows for
+coordinate-free transformations in a structure-preserving manner by using the
+geometric product. Of further note is the outer product, which constructs
+higher-dimensional subspaces from basic elements. Of the various models of
+geometric algebra in use, the homogenous model is of most interest for this thesis.
+This model embeds $n$-dimensional space in a $n + 1$-dimensional representational
+space (similarly to the homogenous model of linear algebra).  Lines are
+represented as the outer product of two vectors (which themselves represent
+points); this is referred to as a \emph{2-blade} or more generally a
+\emph{bivector}. These line elements can be represented as vectors on a basis of
+$n \choose 2$ bivectors (the amount of unique bivectors in $n$-dimensional
+space), leading to a space which uses lines as its basis elements (a \emph{line
+space}). Applying this to lines in homogeneous 3D space leads to an equivalence
+with Pl\"{u}cker coordinates, a system for representing 3D lines by means of 6
+homogeneous coordinates. This leads to a system referred to as the Pl\"{u}cker
+model of geometric algebra.
+
+\subsection{Research Topic}
+Recent research of the Pl\"{u}cker model (done by \cite{hangbo2011}
+\cite{dorst2013versors} \cite{pottmann2001computational} \cite{dekok2012} as
+elaborated on in section 2) has provided the geometric elements of the space
+with visual interpretations. GAViewer, a geometric algebra visualisation tool
+which currently has partial support for the Pl\"{u}cker model, will be extended
+with a particularly tricky 3-blade whose visualisation is in the form of a
+regulus (figure \ref{fig:regulus}).
+
+In addition, the Pl\"{u}cker model will be applied to 2D projective geometry by
+taking a cross-section of a regulus to be a conic section in 2D and considering
+only transformations which keep this cross-section constant. The following
+projective concepts will be focused on:
+\begin{itemize}
+  \item Testing for membership of a point to a conic section.
+  \item The duality between a point and a line relative to a conic section.
+\end{itemize}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.5\textwidth]{regulus.png}
+  \caption{A regulus}
+  \label{fig:regulus}
+\end{figure}
+
+\section{Literature Review}
+Li and Zhang\cite{hangbo2011} model line geometry in a 6D space, representing
+lines by means of their Pl\"{u}cker coordinates (with the constraint that the
+vector must square to zero, i.e. be a null vector).  The 6D vector of a line's
+Pl\"{u}cker coordinates corresponds to the coordinates of of the line's
+direction and moment on a basis of 2-blades in $\wedge^2(V^4)$, a bivector space
+over the 4D homogeneous vector space. Through a clever correspondence with the
+homogeneous space, Li and Zhang also provide a metric for the 6D
+representational space and show that it has the signature $\mathbb{R}^{3, 3}$. They
+proceed to give geometric interpretations of the various blades that can be
+formed in $\mathbb{R}^{3, 3}$.
+
+Pottmann and Wallner\cite{pottmann2001computational} do similarly, except they
+stay within the domain of linear algebra, giving a different viewpoint to what is
+essentially the same geometry.
+
+Leo Dorst\cite{dorst2013versors} provides visual representations for many of the
+geometric features described by \cite{hangbo2011} and
+\cite{pottmann2001computational} and describes how to extract the data required
+for implementing these visualizations in software. Additionally, the paper
+contains a novel approach to modeling 2D projective geometry in the previously
+described \rp, defining the elementary operations (translations, scaling,
+perspective transformations, a rotation and a squeeze) in terms of their
+transformation matrices.
+
+GAViewer\footnote{\url{http://www.geometricalgebra.net/gaviewer\_download.html}}
+is a graphical calculator for geometric algebra which handles many different
+algebraic models. Patrick de Kok\cite{dekok2012} implemented the
+Pl\"{u}cker model of Li and Zhang in GAViewer and added many of the
+visualizations described by Dorst.
+
+Cinderella\cite{richter1999interactive} is a software package for performing
+interactive 2D projective geometry using a 6D homogeneous representation with
+complex numbers. This avoids the edge cases commonly experienced in classic
+Euclidean geometry. For a good read on their approach to this problem, see
+\url{http://doc.cinderella.de/tiki-index.php?page=Theoretical+Background}.
+Note that their use of 6 dimensions to represent 2D geometry hints at a
+correspondence with the model described by Dorst, who also uses 6 (albeit
+different) dimensions for representing 2D projective geometry.
+
+\section{Extracting the regulus parameters}
+\subsection{Theory}
+The regulus can be described by three axes; The main axis describes the
+orientation of the regulus, while two additional axes represent the major and
+minor axes of the ellipse at the center cross-section.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.5\textwidth]{axes.png}
+  \caption{The standard regulus with its axes shown in red. The camera is
+    oriented along the main axis.}
+  \label{fig:axes}
+\end{figure}
+
+The standard regulus $R_0$ is formed by the outer product of the following three
+skew lines:
+\begin{itemize}
+  \item $e_{02} + e_{12} + e_{03} - e_{31} / \sqrt(2)$
+  \item $-e_{01} + e_{12} + e_{03} - e_{23} / \sqrt(2)$
+  \item $-e_{02} + e_{12} + e_{03} + e_{31} / \sqrt(2)$
+\end{itemize}
+
+This is not a unique factorisation however; the resulting 3-blade could also be
+factorised as $(e_{01} - e_{23}) ^ (e_{02} - e_{31}) ^ (e_{03} - e_{12})$, which
+equates to the factors $a_-, b_-$ and $c_+$ of the unit basis. This
+orthogonal factorisation corresponds to the axes of the regulus; the lines of
+the axes can be retrieved by addition with their associate vectors, i.e.:
+\begin{align*}
+  a_+ + a_- = e_{01} \\
+  b_+ + b_- = e_{02} \\
+  c_+ + c_- = e_{03}
+\end{align*}
+The associate vectors themselves correspond to the axes of the dual standard
+regulus $R_{0}^*$. These factors will remain orthogonal after the standard
+regulus gets transformed to an arbitrary regulus by means of a conformal
+transformation\footnote{A conformal transformation is a transformation which
+  preserves angles}.
+
+Because there is no reliable way of obtaining such a factorisation, a different
+approach has to be taken. One might note that the factors corresponding to the
+axes commute with the regulus, while their associate anticommutes:
+\begin{align*}
+  a_- R_0 &= a_- \rfloor R_0 + a_- \wedge R_0 = a_- \rfloor R_0 =  R_0 \lfloor a_- = R_0 a_- \\
+  a_+ R_0 &= a_+ \rfloor R_0 + a_+ \wedge R_0 = a_+ \wedge R_0 = -R_0 \wedge a_+ = -R_0 a_+ \\
+\end{align*}
+
+These properties can be easily described by means of a linear operator
+\underline{R} based on the regulus R\cite{dorst2013versors}:
+\begin{align*}
+  \underline{R} : x \mapsto R^{-1} x R
+\end{align*}
+It is easy to prove that that commutation and anti-commutation properties are
+captured by the eigenvectors of eigenvalues 1 and -1 respectively.
+For eigenvalue 1:
+\begin{align*}
+  R^{-1} x R &= x \\
+  x R &= R x
+\end{align*}
+and similarly for eigenvalue -1:
+\begin{align*}
+  R^{-1} x R &= -x \\
+  x R &= R (-x)
+\end{align*}
+
+This means that the axes can be retrieved from the eigenvectors of eigenvalue 1 of
+the operator \underline{R} along with their associates of eigenvalue -1. Recall
+that the axes of $R_0$ correspond to $a_-$, $b_-$ and $c_+$; two of them square
+to the same sign, while one squares to the opposite sign. The one with the
+differing sign corresponds to the main axis. This property remains intact
+after a conformal transformation from $R_0$ to a general regulus $R$.
+
+The length of the axes also follows naturally from this process. Given an
+scaling factor $e^\gamma$, the finite components of the eigenvectors scales with
+a factor $e^\gamma$ while the infinite components scale with
+$e^{-\gamma}$\cite{dorst2013versors}. This
+means that the eigenvectors can be freely rescaled without losing any
+information about the axes' lengths.
+
+With this knowledge, the algorithm for obtaining a regulus' axes is as follows:
+\begin{enumerate}
+  \item Obtain eigenvectors of the linear operator $\underline{R}$
+  \item Look for the two eigenvectors of eigenvalue 1 whose squares have the
+    same sign; these denote the center ellipse, while the other one denotes the
+    main axis.
+  \item Add these vectors to their associate eigenvectors of eigenvalue -1 to
+    obtain the lines of the axes.
+\end{enumerate}
+
+\subsection{Implementation}
+\subsubsection{Eigenvectors}
+Following the algorithm described in the previous section, the first step is to
+obtain the eigenvectors of a linear operator. There is no geometric process for
+this, so the obvious thing to do is to convert the transformation to a
+transformation matrix and use common techniques from linear algebra to do the
+eigenvector decomposition. 
+
+The transformation matrix $F$ will be defined by means of its elements $F(i, j)$
+where $i$ refers to the row and $j$ to the column. The transformation performed
+by the linear operator on a vector $x$ is referred to as $f[x]$. Additionally,
+$b_i$ refers to the i'th basis vector while $b^i$ refers to the reciprocal of
+the i'th basis vectors (that is, $b_i \cdot b^j = 1$):
+\begin{align}
+  F(j, i) = f[b_i] \cdot b^j \label{eq:matrix}
+\end{align}
+This algorithm is taken from \cite{dorst2009geometric}. Keep in mind that in
+this case, the inner product is taken in the Pl\"{u}cker space, which is
+important because of the non-Euclidean metric. For simplicity and consistency with earlier
+work, all calculations are implemented on the null basis. The basis vectors are
+6D vectors whose components are coefficients on the ${e_{01}, e_{02}, e_{03},
+  e_{23}, e_{31}, e_{12}}$ basis, e.g. the vector $\begin{bmatrix} 1 & 0 & 1 & 0
+  & 0 & 0 \end{bmatrix}$ represents the geometric element $e_{01} + e_{03}$.
+
+Formula \ref{eq:matrix} can be simplified by observing a number of properties:
+\begin{itemize}
+  \item $x \cdot y$ can be written as $x^T M y$, where $M$ is the metric matrix
+    for the null basis
+  \item The metric matrix squares to the identity matrix (i.e. $M * M = I$)
+  \item As long as a metric matrix contains only the values -1, 0 and 1, it acts
+    as a selection operation for a basis vector's reciprocal; if $b_{1}^{T} (M b_{2}) = 1$
+    then $(M b_{2})$ must be the reciprocal of $b_{1}$.
+\end{itemize}
+This allows for simplification of the previous formula:
+\begin{align*}
+  F(j, i) &= f[b_i] \cdot b^j \\
+  F(j, i) &= f[b_i]^T M b^j \\
+  F(j, i) &= f[b_i]^T M (M b_j) \\
+  F(j, i) &= f[b_i]^T (M M) b_j \\
+  F(j, i) &= f[b_i]^T b_j
+\end{align*}
+The transformation $f[b_i]$ is realized by converting the vector $b_i$ to it's
+corresponding geometrical element, applying the regulus operator to it and
+converting the result back to a vector representation.
+
+Once the transformation matrix has been constructed, the eigenvectors can be
+found by any of the conventional methods. I opted for the
+Eigen\footnote{http://eigen.tuxfamily.org/} library for C++.
+
+\subsection{Matching associates}
+The obtained eigenvectors will likely not be in a usable state yet; any scalar
+multiple of an eigenvector is also an eigenvector, and different norms make it
+hard to match associates, which are supposed to exactly cancel out the infinite
+components. This is easily alleviated in two ways. First, the eigenvectors are
+rescaled such that they square to 1. This solves part of the problem, but still
+leaves potential inconsistencies in minus signs. For example, when looking for
+the element $(e_{01} - e_{23}) / \sqrt{2})$ and its associate $(e_{01} + e_{23})
+/ \sqrt{2})$, the associate might end up being in the form of $-e_{01} - e_{23})
+/ \sqrt(2)$; the element would still square to 1, but adding the elements would
+produce an infinite line rather than a finite one as desired.
+
+This problem is fixed by making sure that the first finite component of each
+eigenvector has a positive coefficient; vectors that do not meet this demand
+shall be multiplied by $-1$ until they do.
+
+Once the eigenvectors have been coaxed into a usable shape, finding the
+associates is a matter of trivially brute-force searching. For each of the three
+eigenvectors of value 1, each eigenvector valued $-1$ is checked so see if their
+sum produces a finite line. After this process, each eigenvector will have an
+associate and the axis lines are now known from their sum.
+
+\subsection{Slant}
+An additional parameter of the regulus is the slant of its lines, which is the
+direction the lines rotate along the regulus' center ellipse (more on this in
+the drawing section). The slant follows from the squares of the eigenvectors of
+eigenvalue 1: two negatively squared eigenvectors correspond to the orientation
+of the standard regulus, while two positively squared eigenvectors correspond to
+the dual standard regulus' orientation.
+
+\bibliographystyle{plain}
+\bibliography{library}
+\end{document}
