@@ -111,9 +111,9 @@ linear algebra. Unlike linear algebra however, geometric algebra allows for
 coordinate-free transformations in a structure-preserving manner by using the
 geometric product. Of further importance is the outer product, which constructs
 higher-dimensional subspaces from basic elements. Of the various models of
-geometric algebra in use, the homogenous model is of most interest for this thesis.
+geometric algebra in use, the homogeneous model is of most interest for this thesis.
 This model embeds $n$-dimensional space in a $n + 1$-dimensional representational
-space (similarly to the homogenous model of linear algebra).  Lines are
+space (similarly to the homogeneous model of linear algebra).  Lines are
 represented as the outer product of two vectors (which themselves represent
 points); this is referred to as a \emph{2-blade} or more generally a
 \emph{bivector}. These line elements can be represented as vectors on a basis of
@@ -198,7 +198,7 @@ the focus of this thesis, the focus will specifically be on the embedding of
 $\mathbb{R}^3$ in the 4-dimensional vector space $V^4$ (defining a metric for
 this space is not necessary).
 
-In the homogeneous model, the basis ${e_1, e^2, e^3}$ is extended by an
+In the homogeneous model, the basis ${e_1, e_2, e_3}$ is extended by an
 additional element $e_0$. This origin of $\mathbb{R}^3$ is taken to be offset by
 a distance of 1 in the $e_0$ direction. As in linear algebra, elements that have
 a non-zero $e_0$ component are interpreted by projecting them onto
@@ -286,7 +286,7 @@ The metric for this space is given by \cite{hangbo2011}. Given two bivectors $A$
 and $B$ in $V^4$ and their embeddings in $\wedge^2 V^4$ $Em(A)$ and $Em(B)$, the
 inner product is defined as:
 \begin{align*}
-  Em(A) \cdot Em(B) = [A ^ B]
+  Em(A) \cdot Em(B) = [A \wedge B]
 \end{align*}
 where the bracket operator refers to proportionality with the pseudoscalar $I_4$
 of $V^4$. This leads to the multiplication table show in table \ref{table:mult}.
@@ -374,13 +374,13 @@ minor axes of the ellipse at the center cross-section.
 The standard regulus $R_0$ is formed by the outer product of the following three
 skew lines:
 \begin{itemize}
-  \item $e_{02} + e_{12} + e_{03} - e_{31} / \sqrt(2)$
-  \item $-e_{01} + e_{12} + e_{03} - e_{23} / \sqrt(2)$
-  \item $-e_{02} + e_{12} + e_{03} + e_{31} / \sqrt(2)$
+  \item ($e_{02} + e_{12} + e_{03} - e_{31}) / \sqrt{2}$
+  \item ($-e_{01} + e_{12} + e_{03} - e_{23}) / \sqrt{2}$
+  \item ($-e_{02} + e_{12} + e_{03} + e_{31}) / \sqrt{2}$
 \end{itemize}
 
 This is not a unique factorisation however; the resulting 3-blade could also be
-factorised as $(e_{01} - e_{23}) ^ (e_{02} - e_{31}) ^ (e_{03} - e_{12})$, which
+factorised as $(e_{01} - e_{23}) \wedge (e_{02} - e_{31}) \wedge (e_{03} - e_{12})$, which
 equates to the factors $a_-, b_-$ and $c_+$ of the unit basis. This
 orthogonal factorisation corresponds to the axes of the regulus; the lines of
 the axes can be retrieved by addition with their associate vectors, i.e.:
@@ -526,9 +526,9 @@ hard to match associates, which are supposed to exactly cancel out the infinite
 components. This is easily alleviated in two ways. First, the eigenvectors are
 rescaled such that they square to 1. This solves part of the problem, but still
 leaves potential inconsistencies in minus signs. For example, when looking at
-the element $(e_{01} - e_{23}) / \sqrt{2})$ and its associate $(e_{01} + e_{23})
-/ \sqrt{2})$, the associate might end up being in the form of $-e_{01} - e_{23})
-/ \sqrt(2)$; the element would still square to 1, but adding the elements would
+the element $(e_{01} - e_{23}) / \sqrt{2}$ and its associate $(e_{01} + e_{23})
+/ \sqrt{2}$, the associate might end up being in the form of $(-e_{01} - e_{23})
+/ \sqrt{2}$; the element would still square to 1, but adding the elements would
 produce an infinite line rather than a finite one as desired.
 This problem is fixed by making sure that the first finite component of each
 eigenvector has a positive coefficient; vectors that do not meet this demand
